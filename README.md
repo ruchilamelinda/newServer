@@ -11,7 +11,7 @@ Langkah-langkah Clone Repository
 1. Buka Android Studio: Pastikan Anda berada di halaman awal Android Studio atau keluar dari proyek yang sedang dibuka.
    
 3. Pilih Opsi Get from VCS:
-  - Pada halaman utama Android Studio, klik Get from Version Control. Jika   Anda tidak menemukan opsi ini, Anda dapat menemukannya di menu File > New > Project from Version Control.
+   - Pada halaman utama Android Studio, klik Get from Version Control. Jika   Anda tidak menemukan opsi ini, Anda dapat menemukannya di menu File > New > Project from Version Control.
     
 3. Masukkan URL Repository GitHub:
    - Buka repository GitHub yang ingin Anda clone.
