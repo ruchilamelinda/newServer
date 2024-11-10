@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.esl.screen.LandingPage
+import com.example.esl.screen.Register
 import com.example.esl.ui.theme.ESLTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ESLTheme {
-                LandingPage()
+                Register()
                 }
             }
         }
