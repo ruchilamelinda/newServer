@@ -1,5 +1,6 @@
 package com.example.esl.ui.theme
 
+import androidx.compose.material3.ButtonColors
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -11,3 +12,5 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val BackgroundColor = Color(0xFF40E0D0)
+val ButtonColors = Color(0xFFDEF9C4)
+val BarColor = Color(0xFF007081)
