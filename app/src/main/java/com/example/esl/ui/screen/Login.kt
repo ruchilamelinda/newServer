@@ -1,4 +1,4 @@
-package com.example.esl.screen
+package com.example.esl.ui.screen
 
 import android.content.Intent
 import androidx.compose.foundation.Image

@@ -1,4 +1,4 @@
-package com.example.esl.screen
+package com.example.esl.ui.screen
 
 import android.app.Activity
 import android.content.Intent
@@ -7,11 +7,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -23,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import com.example.esl.MainActivity
 import com.example.esl.ui.theme.ESLTheme
 import com.example.esl.R
-import kotlinx.coroutines.time.delay
 
 
 @Composable
