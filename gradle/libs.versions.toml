@@ -11,6 +11,11 @@ composeBom = "2024.04.01"
 retrofit = "2.11.0"
 converterGson = "2.11.0"
 roomRuntime = "2.7.0-alpha11"
+navigationCompose = "2.9.0-alpha03"
+navigationComposeVersion = "2.8.2"
+mapsCompose = "6.2.1"
+roomRuntimeVersion = "2.7.0-alpha07"
+roomCompiler = "2.7.0-alpha07"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +35,11 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGson" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationComposeVersion" }
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsCompose" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntimeVersion" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
