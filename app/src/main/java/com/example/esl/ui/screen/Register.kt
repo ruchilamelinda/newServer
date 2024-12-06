@@ -43,7 +43,6 @@ import com.example.esl.ui.theme.ESLTheme
 @Composable
 fun Register(modifier: Modifier = Modifier) {
     var nama by remember { mutableStateOf("") }
-    var nik by remember { mutableStateOf("") }
     var noHP by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
@@ -83,16 +82,6 @@ fun Register(modifier: Modifier = Modifier) {
                         .padding(15.dp)
                 )
 
-//            TextField(
-//                value = nik,
-//                onValueChange = { nik = it },
-//                singleLine = true,
-//                label = { Text(stringResource(R.string.NIK)) },
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-//                modifier = modifier
-//                    .fillMaxWidth()
-//                    .padding(15.dp)
-//            )
 
                 TextField(
                     value = noHP,
