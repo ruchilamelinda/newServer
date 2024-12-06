@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.esl"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.esl"
@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.maps.compose)
     implementation(libs.room.runtime)
     implementation(libs.androidx.room.compiler)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
