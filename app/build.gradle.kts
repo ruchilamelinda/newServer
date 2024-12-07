@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.esl"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.esl"
@@ -48,7 +48,9 @@ android {
         }
     }
 }
-
+configurations.implementation{
+    exclude(group= "com.intellij", module = "annotations")
+}
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
