@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -39,10 +40,15 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.esl.ui.theme.ESLTheme
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PemesananScreen() {
+    var durasi by remember { mutableStateOf("3 hari") }
+    var mulai by remember { mutableStateOf("15.00 WIB") }
+    var harga by remember { mutableStateOf("Rp. 250.000,-") }
+    var selectedOption by remember { mutableStateOf("Shopeepay") }
+    var isFileUploaded by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -55,29 +61,38 @@ fun PemesananScreen() {
                 )
             )
         }
-    ) { innerPadding -> // Use the provided innerPadding
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
-                .padding(innerPadding) // Apply innerPadding here
+                .padding(innerPadding)
                 .background(Color(0xFFB2DFDB))
         ) {
             DetailKendaraan()
             Spacer(modifier = Modifier.height(16.dp))
-            FormField(label = "Durasi", value = "3 hari")
-            FormField(label = "Mulai", value = "15.00 WIB")
-            FormField(label = "Harga", value = "Rp. 250.000,-")
+            FormField(label = "Durasi", value = durasi, onValueChange = { durasi = it })
+            FormField(label = "Mulai", value = mulai, onValueChange = { mulai = it })
+            FormField(label = "Harga", value = harga, onValueChange = { harga = it })
             Spacer(modifier = Modifier.height(16.dp))
-            MetodePembayaranDropdown()
+            MetodePembayaranDropdown(
+                selectedOption = selectedOption,
+                onOptionSelected = { selectedOption = it }
+            )
             Spacer(modifier = Modifier.height(16.dp))
-            UploadFileButton()
+            UploadFileButton(
+                isFileUploaded = isFileUploaded,
+                onFileUploaded = { isFileUploaded = true }
+            )
             Spacer(modifier = Modifier.height(24.dp))
-            PesanButton()
+            PesanButton(
+                onClick = {
+                    // Handle pesan
+                }
+            )
         }
     }
 }
-
 
 @Composable
 fun DetailKendaraan() {
@@ -103,63 +118,53 @@ fun DetailKendaraan() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormField(label: String, value: String) {
+fun FormField(label: String, value: String, onValueChange: (String) -> Unit) {
     Column {
         Text(label, fontSize = 14.sp, color = Color.Gray)
         TextField(
             value = value,
-            onValueChange = {},
-            enabled = false,
+            onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp),
 //            colors = TextFieldDefaults.textFieldColors(
 //                containerColor = Color.White,
-//                disabledIndicatorColor = Color.Transparent,
-//                focusedIndicatorColor = Color.Transparent,
-//                unfocusedIndicatorColor = Color.Transparent
-            )
+//                focusedIndicatorColor = Color.Gray,
+//                unfocusedIndicatorColor = Color.LightGray
+//            )
+        )
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MetodePembayaranDropdown() {
+fun MetodePembayaranDropdown(
+    selectedOption: String,
+    onOptionSelected: (String) -> Unit
+) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedOption by remember { mutableStateOf("Shopeepay") }
 
     Column {
         Text("Metode Pembayaran", fontSize = 14.sp, color = Color.Gray)
         Box {
-            TextField(
-                value = selectedOption,
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-//                colors = TextFieldDefaults.textFieldcolors(
-//                    containerColor = Color.White,
-//                    disabledIndicatorColor = Color.Transparent,
-//                    focusedIndicatorColor = Color.Transparent,
-//                    unfocusedIndicatorColor = Color.Transparent
-//                ),
-                trailingIcon = {
-                    Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
-                },
-                enabled = false
-            )
+            OutlinedButton(
+                onClick = { expanded = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(selectedOption, modifier = Modifier.weight(1f))
+                Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
+            }
             DropdownMenu(
                 expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.fillMaxWidth()
+                onDismissRequest = { expanded = false }
             ) {
                 listOf("Shopeepay", "Gopay", "Transfer Bank").forEach { option ->
                     DropdownMenuItem(
                         text = { Text(option) },
                         onClick = {
-                            selectedOption = option
+                            onOptionSelected(option)
                             expanded = false
-                        })
+                        }
+                    )
                 }
             }
         }
@@ -167,11 +172,11 @@ fun MetodePembayaranDropdown() {
 }
 
 @Composable
-fun UploadFileButton() {
+fun UploadFileButton(isFileUploaded: Boolean, onFileUploaded: () -> Unit) {
     Column {
         Text("Bukti Pembayaran", fontSize = 14.sp, color = Color.Gray)
         OutlinedButton(
-            onClick = { /* Handle upload */ },
+            onClick = { onFileUploaded() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp),
@@ -179,15 +184,15 @@ fun UploadFileButton() {
         ) {
             Icon(Icons.Filled.FileUpload, contentDescription = "Upload")
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Upload File")
+            Text(if (isFileUploaded) "File Uploaded" else "Upload File")
         }
     }
 }
 
 @Composable
-fun PesanButton() {
+fun PesanButton(onClick: () -> Unit) {
     Button(
-        onClick = { /* Handle pesan */ },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -196,6 +201,7 @@ fun PesanButton() {
         Text("Pesan", color = Color.White, fontSize = 16.sp)
     }
 }
+
 
 @Preview
 @Composable
