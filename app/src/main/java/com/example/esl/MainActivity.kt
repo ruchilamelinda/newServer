@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.esl.ui.LoginScreen
-import com.example.esl.ui.screen.DetailProperty
+import androidx.navigation.compose.rememberNavController
+import com.example.app.ui.screen.FavoritScreen
 import com.example.esl.ui.theme.ESLTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,12 +14,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ESLTheme {
-               LoginScreen {
-
-               }
-                }
+                val navController = rememberNavController()
+                FavoritScreen(navController = navController)
             }
         }
     }
+}
+
 
 
