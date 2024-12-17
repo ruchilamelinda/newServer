@@ -20,60 +20,65 @@ import com.example.esl.ui.theme.ESLTheme
 
 @Composable
 fun FavoritScreen(navController: NavController) {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color(0xFFB2EBF2))) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            // Header Section
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFF00796B))
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Favorit",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
-                )
-            }
+    Scaffold(
+        bottomBar = { BottomNavBar(navController = navController) }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFFB2EBF2))
+                .padding(innerPadding) // Berikan padding dari Scaffold
+        ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                // Header Section
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(0xFF00796B))
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Favorit",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.White
+                    )
+                }
 
-            // Favorit List Section
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                FavoritItem(
-                    title = "Nama Rumah",
-                    name = "Rumah Tepi Danau",
-                    date = "09/09/2024",
-                    owner = "Ruchil"
-                )
+                // Favorit List Section
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    FavoritItem(
+                        title = "Nama Rumah",
+                        name = "Rumah Tepi Danau",
+                        date = "09/09/2024",
+                        owner = "Ruchil"
+                    )
 
-                FavoritItem(
-                    title = "Nama Kendaraan",
-                    name = "Motor Beat BA 1654 AB",
-                    date = "10/09/2024",
-                    owner = "Vioni"
-                )
+                    FavoritItem(
+                        title = "Nama Kendaraan",
+                        name = "Motor Beat BA 1654 AB",
+                        date = "10/09/2024",
+                        owner = "Vioni"
+                    )
 
-                FavoritItem(
-                    title = "Nama Kendaraan",
-                    name = "Sepeda Gunung",
-                    date = "08/09/2024",
-                    owner = "Vioni"
-                )
+                    FavoritItem(
+                        title = "Nama Kendaraan",
+                        name = "Sepeda Gunung",
+                        date = "08/09/2024",
+                        owner = "Vioni"
+                    )
+                }
             }
         }
-
-        // Bottom Navigation Bar
-        BottomNavBar(navController = navController, modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
+
 
 @Composable
 fun FavoritItem(title: String, name: String, date: String, owner: String) {
