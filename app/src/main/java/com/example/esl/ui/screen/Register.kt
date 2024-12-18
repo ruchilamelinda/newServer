@@ -154,10 +154,22 @@ fun Register(modifier: Modifier = Modifier, onRegisterSuccess: () -> Unit) {
                         val response = RetrofitInstance.api.register(
                             RegisterRequest(nama, noHP, email, username, password)
                         )
-                        onRegisterSuccess()
+
+                        if (response.isSuccessful && response.body() != null) {
+                            val registerResponse = response.body()
+                            if (registerResponse?.success == true) {
+                                onRegisterSuccess() // Notifikasi bahwa register berhasil
+                            } else {
+                                errorMessage = "Register gagal: ${registerResponse?.message}"
+                            }
+                        } else {
+                            errorMessage = "Register gagal: ${response.errorBody()?.string()}"
+                        }
                     } catch (e: Exception) {
-                        errorMessage = "Register gagal: ${e.message}"
+                        errorMessage = "Terjadi kesalahan: ${e.localizedMessage}"
+                        e.printStackTrace()
                     }
+
                 } },
                 contentPadding = PaddingValues(16.dp),
                 shape = RoundedCornerShape(20.dp),

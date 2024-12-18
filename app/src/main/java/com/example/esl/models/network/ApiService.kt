@@ -1,6 +1,7 @@
 package com.example.esl.models.network
 
 import com.example.esl.models.local.entities.User
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
@@ -31,12 +32,17 @@ data class UserResponse(
     val created_at: String,
     val updated_at: String
 )
+data class RegisterResponse(
+    val success: Boolean,
+    val message: String,
+    val data: User?
+)
 
 data class LoginRequest(val email: String, val password: String)
 
 interface ApiService {
     @POST("register")
-    suspend fun register(@Body request: RegisterRequest): AuthResponse
+    suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
 
     @POST("login")
     suspend fun login(@Body request: LoginRequest): AuthResponse
