@@ -29,27 +29,27 @@ import androidx.navigation.compose.rememberNavController
 import com.example.esl.ui.screen.Home
 import com.example.esl.ui.theme.BarColor
 
-@Composable
-fun AppNavigation() {
-    // Membuat NavController
-    val navController = rememberNavController()
-
-    // Menyusun NavHost untuk mendefinisikan rute
-    NavHost(
-        navController = navController,
-        startDestination = "home" // Rute awal
-    ) {
-        // Rute ke halaman Home
-        composable("home") {
-            Home()
-        }
-
-//        // Rute ke halaman lain (misalnya, Halaman Profil)
-//        composable("profile") {
-//            ProfileScreen(navController)
+//@Composable
+//fun AppNavigation() {
+//    // Membuat NavController
+//    val navController = rememberNavController()
+//
+//    // Menyusun NavHost untuk mendefinisikan rute
+//    NavHost(
+//        navController = navController,
+//        startDestination = "home" // Rute awal
+//    ) {
+//        // Rute ke halaman Home
+//        composable("home") {
+//            Home()
 //        }
-    }
-}
+//
+////        // Rute ke halaman lain (misalnya, Halaman Profil)
+////        composable("profile") {
+////            ProfileScreen(navController)
+////        }
+//    }
+//}
 
 @Composable
 fun BottomNavBar(navController: NavController) {
