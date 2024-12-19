@@ -62,7 +62,6 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginSuccess: ()-> Unit, onRegi
                 ),
                 shape = RoundedCornerShape(8.dp)
             )
-
             Text(
                 text = "Password",
                 color = Color.White,
