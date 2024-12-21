@@ -21,8 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     id_users: DataTypes.INTEGER,
     tanggal_kirim: DataTypes.DATE,
-    status_notifikasi: DataTypes.ENUM
-  }, {
+    status_notifikasi: {
+      type: DataTypes.ENUM,
+    values: ["read", "unread"],
+  }
+}, {
     sequelize,
     modelName: 'Notifikasi',
   });
