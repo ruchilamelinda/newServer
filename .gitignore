@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.iml
 .gradle
 /local.properties
@@ -15,3 +16,6 @@
 .cxx
 local.properties
 node_modules/
+=======
+node_modules/
+>>>>>>> 1ff3386cbb5f75cb2e77dc6558daa39a7cecd7f9
