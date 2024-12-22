@@ -26,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
     pemilik: DataTypes.STRING,
     hargaSewa: DataTypes.INTEGER,
     lokasi: DataTypes.STRING,
+    latitude: {
+      type: DataTypes.DECIMAL(10, 8),
+      allowNull: true
+    },
+    longitude: {
+      type: DataTypes.DECIMAL(11, 8),
+      allowNull: true
+    },
     status_properti: DataTypes.BOOLEAN,
     foto_properti: DataTypes.STRING
   }, {

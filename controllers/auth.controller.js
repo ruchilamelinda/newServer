@@ -34,15 +34,20 @@ exports.register = async (req, res) => {
             email,
             username,
             password: hashedPassword,
-            foto_profil : null,
+            foto_profil: null,
         });
 
-        res.status(201).json({ message: 'User registered successfully', user: newUser });
+        return res.status(201).json({
+            success: true,
+            message: 'User registered successfully',
+            user: newUser
+        });
     } catch (error) {
         console.error('Error di endpoint register:', error); 
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
+
 
 // Login User
 exports.login = async (req, res) => {

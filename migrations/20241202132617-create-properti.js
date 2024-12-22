@@ -31,6 +31,14 @@ module.exports = {
       lokasi: {
         type: Sequelize.STRING
       },
+      latitude: {
+        type: Sequelize.DECIMAL(10, 8),
+        allowNull: true
+      },
+      longitude: {
+        type: Sequelize.DECIMAL(11, 8),
+        allowNull: true
+      },
       status_properti: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
