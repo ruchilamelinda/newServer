@@ -17,6 +17,14 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      id_properti: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Properti',
+        key: 'id_properti',
+      },
+      onDelete: 'CASCADE',
+    },
       tanggalMulai: {
         type: Sequelize.DATE,
         allowNull: false,

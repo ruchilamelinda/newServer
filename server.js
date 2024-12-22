@@ -28,6 +28,7 @@ app.use((req, res, next) => {
 });
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Import Routes (contoh)
 const authRoutes = require('./routes/auth.route');
@@ -35,6 +36,12 @@ app.use('/api/auth', authRoutes);
 
 const propertiRoutes = require('./routes/properti.route');
 app.use('/api/properti', propertiRoutes);
+
+const penyewaanRoutes = require('./routes/penyewaan.route');
+app.use('/api/penyewaan', penyewaanRoutes);
+
+const ulasanRoutes = require('./routes/ulasan.route');
+app.use('/api/ulasan', ulasanRoutes);
 
 // Sinkronisasi Database
 sequelize.sync(false)

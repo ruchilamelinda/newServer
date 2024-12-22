@@ -25,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
     ulasan: DataTypes.TEXT,
     rating: DataTypes.INTEGER,
     media_ulasan: DataTypes.STRING,
-    tanggal_input: DataTypes.DATE
+    tanggal_input: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    }
   }, {
     sequelize,
     modelName: 'Ulasan',

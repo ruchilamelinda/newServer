@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Penyewaan.belongsTo(models.Users, { foreignKey: 'id_users' });
+      Penyewaan.belongsTo(models.Properti, { foreignKey: 'id_properti' });
       Penyewaan.hasMany(models.Ulasan, { foreignKey: 'id_penyewaan' });
     }
   }
@@ -21,10 +22,11 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     id_users: DataTypes.INTEGER,
+    id_properti: DataTypes.INTEGER,
     tanggalMulai: DataTypes.DATE,
     tanggalAkhir: DataTypes.DATE,
     tanggalOrder: DataTypes.DATE,
-    masaSewa: DataTypes.DATE,
+    masaSewa: DataTypes.INTEGER,
     tanggalMulai_Update: DataTypes.DATE,
     tanggalAkhir_Update: DataTypes.DATE,
     status: DataTypes.ENUM('Aktif', 'Selesai', 'Dibatalkan'),
