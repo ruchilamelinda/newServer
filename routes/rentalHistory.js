@@ -1,23 +1,25 @@
 const express = require('express');
-const Penyewaan = require('../models/penyewaan');
-const Properti = require('../models/properti');
+const {Penyewaan} = require('../models');
+const {Properti} = require('../models');
 const router = express.Router();
 
-// GET rentals with status "Selesai"
 router.get('/', async (req, res) => {
-    try {console.log("testingOi")
-    
-        const rentals = await Penyewaan.find({ status: "Selesai" }).populate({
-            path: 'propertiId', 
-            select: 'nama_properti pemilik', 
+    try {console.log("tes oi");
+        // Query to get all rentals with status 'Selesai'
+        const rentals = await Penyewaan.findAll({
+            where: { status: "Selesai" }, // Sequelize syntax for where clause
+            include: [{
+                model: Properti, // Join with the Properti model
+                attributes: ['nama_properti', 'pemilik'] // Select specific fields
+            }]
         });
 
         // Format data yang akan dikirim
         const formattedRentals = rentals.map((rental) => ({
             status: rental.status,
             tanggalOrder: rental.tanggalOrder,
-            nama_properti: rental.propertiId?.nama_properti || "Tidak diketahui",
-            pemilik: rental.propertiId?.pemilik || "Tidak diketahui",
+            nama_properti: rental.Properti?.nama_properti || "Tidak diketahui",
+            pemilik: rental.Properti?.pemilik || "Tidak diketahui",
         }));
 
         res.json(formattedRentals);
@@ -25,5 +27,4 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Server Error', error: error.message });
     }
 });
-
 module.exports = router;
