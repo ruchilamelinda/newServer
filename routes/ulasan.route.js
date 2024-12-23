@@ -21,6 +21,7 @@ router.post('/', upload.single('media_ulasan'), async (req, res) => {
   try {
     const { id_users, id_penyewaan, ulasan, rating } = req.body;
     const media_ulasan = req.file ? req.file.path : null;
+    
     const review = await Ulasan.create({
       id_users,
       id_penyewaan,

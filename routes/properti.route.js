@@ -28,7 +28,11 @@ router.get('/:id', async (req, res) => {
     if (!properti) {
       return res.status(404).json({ message: 'Properti tidak ditemukan' });
     }
-    res.json(properti);
+    res.json({ 
+      success: true,
+      message: 'Data properti berhasil diambil',
+      data: properti
+    });
   } catch (error) {
     res.status(500).json({ message: 'Terjadi kesalahan pada server' });
   }
