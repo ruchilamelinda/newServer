@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
             }]
         });
 
-        // Format data yang akan dikirim
+//format yg dikirim
         const formattedRentals = rentals.map((rental) => ({
             status: rental.status,
             tanggalOrder: rental.tanggalOrder,
