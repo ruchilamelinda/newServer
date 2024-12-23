@@ -11,6 +11,11 @@ router.post('/', async (req, res) => {
     const startDate = moment(tanggalMulai);
     const endDate = moment(tanggalAkhir);
     const masaSewa = endDate.diff(startDate, 'days'); // Hitung selisih hari
+
+    if (!id_users || !id_properti || !tanggalMulai || !tanggalAkhir) {
+      console.warn('⚠️ Validasi gagal: Semua field harus diisi');
+      return res.status(400).json({ message: 'Semua field harus diisi' });
+    }
     const penyewaan = await Penyewaan.create({
         id_users,
         id_properti,
