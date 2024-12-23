@@ -4,18 +4,19 @@ const {Properti} = require('../models');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    try {console.log("tes oi");
-        // Query to get all rentals with status 'Selesai'
+    try {console.log("aa status da?");
+    
         const rentals = await Penyewaan.findAll({
             where: { status: "Selesai" }, // Sequelize syntax for where clause
             include: [{
                 model: Properti, // Join with the Properti model
-                attributes: ['nama_properti', 'pemilik'] // Select specific fields
+                attributes: ['id_properti', 'nama_properti', 'pemilik'] // Select specific fields
             }]
         });
 
 //format yg dikirim
         const formattedRentals = rentals.map((rental) => ({
+            id_properti: rental.Properti?.id_properti || "Tidak diketahui",
             status: rental.status,
             tanggalOrder: rental.tanggalOrder,
             nama_properti: rental.Properti?.nama_properti || "Tidak diketahui",
@@ -27,4 +28,5 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Server Error', error: error.message });
     }
 });
+
 module.exports = router;

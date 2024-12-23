@@ -1,10 +1,9 @@
-// routes/penyewaan.js
 const express = require('express');
+const {Penyewaan} = require('../models');
+const {Properti} = require('../models');
 const router = express.Router();
-const moment = require('moment');
-const { Penyewaan, Users, Properti } = require('../models');
 
-// Create Penyewaan
+
 router.post('/', async (req, res) => {
   try {
     const { id_users, id_properti, tanggalMulai, tanggalAkhir } = req.body;
@@ -31,38 +30,18 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get Penyewaan By User
-router.get('/user/:id_users', async (req, res) => {
-  try {
-    const penyewaan = await Penyewaan.findAll({
-      where: { id_users: req.params.id_users },
-      include: [{
-        model: Users,
-        attributes: ['id_users', 'nama', 'no_Hp', 'email', 'username']
-    },
-    {
-        model: Properti,
-        attributes: ['id_properti', 'nama_properti', 'jenis_properti', 'hargaSewa', 'lokasi']
-    }]
-    });
-    res.json(penyewaan);
-  } catch (error) {
-    res.status(500).json({ message: 'Gagal mendapatkan penyewaan', error: error.message });
-  }
-});
 
-// Update Status Penyewaan
-router.put('/:id_penyewaan/status', async (req, res) => {
-  try {
-    const { status, alasan_batal } = req.body;
-    await Penyewaan.update(
-      { status, alasan_batal },
-      { where: { id_penyewaan: req.params.id_penyewaan } }
-    );
-    res.json({ message: 'Status penyewaan berhasil diperbarui' });
-  } catch (error) {
-    res.status(400).json({ message: 'Gagal memperbarui status', error: error.message });
-  }
-});
+        // Format data yang akan dikirim
+        const formattedRentals = rentals.map((rental) => ({
+            status: rental.status,
+            tanggalOrder: rental.tanggalOrder,
+            nama_properti: rental.Properti?.nama_properti || "Tidak diketahui",
+            pemilik: rental.Properti?.pemilik || "Tidak diketahui",
+        }));
 
+        res.json(formattedRentals);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error', error: error.message });
+    }
+});
 module.exports = router;
