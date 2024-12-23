@@ -47,6 +47,9 @@ app.use('/api/ulasan', ulasanRoutes);
 const rentalHistoryRoutes = require('./routes/rentalHistory');
 app.use('/api/rental', rentalHistoryRoutes);
 
+const rentalStatusRoutes = require('./routes/rentalStatus');
+app.use('/api/status', rentalStatusRoutes);
+
 // Sinkronisasi Database
 sequelize.sync(false)
   .then(() => {
