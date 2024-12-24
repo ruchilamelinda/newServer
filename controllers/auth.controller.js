@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
-
 const User = require('../models').Users;
 
 // Register User
@@ -14,7 +13,8 @@ exports.register = async (req, res) => {
         }
 
         // Periksa apakah email atau username sudah ada
-        const existingUser = await User.findOne({
+        const existingUser = await Users.findOne({
+
             where: {
                 [Sequelize.Op.or]: [
                     { email: email },
@@ -90,3 +90,4 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Terjadi kesalahan server', error: error.message });
     }
 };
+
