@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const { id_users, id_properti, tanggalMulai, tanggalAkhir } = req.body;
+    const { id_users, id_properti, tanggalMulai, tanggalAkhir, status } = req.body;
     const startDate = moment(tanggalMulai);
     const endDate = moment(tanggalAkhir);
     const masaSewa = endDate.diff(startDate, 'days'); // Hitung selisih hari
@@ -22,9 +22,11 @@ router.post('/', async (req, res) => {
         tanggalAkhir: endDate.format('YYYY-MM-DD HH:mm'),
         tanggalOrder: moment().format('YYYY-MM-DD HH:mm'),
         masaSewa, // Simpan masa sewa sebagai angka (jumlah hari)
-        status: 'Aktif'
+        status
     });
-    res.status(201).json({ message: 'Penyewaan berhasil dibuat', data: penyewaan });
+    res.status(201).json({ 
+      success: true,
+      message: 'Penyewaan berhasil dibuat', data: penyewaan });
   } catch (error) {
     res.status(400).json({ message: 'Gagal membuat penyewaan', error: error.message });
   }

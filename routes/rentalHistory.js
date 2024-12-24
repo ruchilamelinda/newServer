@@ -16,13 +16,16 @@ router.get('/', async (req, res) => {
 
 //format yg dikirim
         const formattedRentals = rentals.map((rental) => ({
+            id_penyewaan: rental.id, 
             id_properti: rental.Properti?.id_properti || "Tidak diketahui",
             status: rental.status,
             tanggalOrder: rental.tanggalOrder,
             nama_properti: rental.Properti?.nama_properti || "Tidak diketahui",
             pemilik: rental.Properti?.pemilik || "Tidak diketahui",
         }));
-
+        
+        console.log("Found rentals:", rentals.length);
+        console.log("Rental data:", JSON.stringify(rentals, null, 2));
         res.json(formattedRentals);
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error: error.message });
