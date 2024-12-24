@@ -2,21 +2,27 @@ const express = require('express');
 const {Penyewaan} = require('../models');
 const {Properti} = require('../models');
 const router = express.Router();
+const authenticateJWT = require('../middleware/authenticate');
 
-router.get('/', async (req, res) => {
-    try {console.log("aa status da?");
-    
+
+router.get('/',authenticateJWT, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        console.log(userId, "ini", "bang");
+        
+        // Query to get all rentals with status 'Selesai'
         const rentals = await Penyewaan.findAll({
-            where: { status: "Selesai" }, // Sequelize syntax for where clause
+            where: { 
+                id_users:userId, 
+                status: "Selesai" }, // Sequelize syntax for where clause
             include: [{
                 model: Properti, // Join with the Properti model
-                attributes: ['id_properti', 'nama_properti', 'pemilik'] // Select specific fields
+                attributes: ['nama_properti', 'pemilik'] // Select specific fields
             }]
         });
 
-//format yg dikirim
+        // Format data yang akan dikirim
         const formattedRentals = rentals.map((rental) => ({
-            id_properti: rental.Properti?.id_properti || "Tidak diketahui",
             status: rental.status,
             tanggalOrder: rental.tanggalOrder,
             nama_properti: rental.Properti?.nama_properti || "Tidak diketahui",
