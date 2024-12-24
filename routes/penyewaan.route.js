@@ -32,18 +32,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-
-        // Format data yang akan dikirim
-        const formattedRentals = rentals.map((rental) => ({
-            status: rental.status,
-            tanggalOrder: rental.tanggalOrder,
-            nama_properti: rental.Properti?.nama_properti || "Tidak diketahui",
-            pemilik: rental.Properti?.pemilik || "Tidak diketahui",
-        }));
-
-        res.json(formattedRentals);
-    } catch (error) {
-        res.status(500).json({ message: 'Server Error', error: error.message });
-    }
-});
 module.exports = router;

@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 
+
 const User = require('../models').Users;
 
 // Register User
@@ -12,6 +13,8 @@ exports.register = async (req, res) => {
         if (!nama || !no_Hp || !email || !username || !password) {
             return res.status(400).json({ error: 'All fields are required' });
         }
+
+        // Periksa apakah email atau username sudah ada
 
         // Periksa apakah email atau username sudah ada
         const existingUser = await User.findOne({
