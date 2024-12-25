@@ -28,8 +28,22 @@ router.get('/:id', async (req, res) => {
     if (!properti) {
       return res.status(404).json({ message: 'Properti tidak ditemukan' });
     }
-    res.json(properti);
+
+     // Tambahkan URL lengkap ke foto_properti
+     const formattedProperti = {
+      ...properti.toJSON(),
+      foto_properti: properti.foto_properti 
+        ? `${req.protocol}://${req.get('host')}/public/${properti.foto_properti}`
+        : null // Jika tidak ada foto_properti
+    };
+
+    res.json({ 
+      success: true,
+      message: 'Data properti berhasil diambil',
+      data: formattedProperti
+    });
   } catch (error) {
+    console.error('Error:', error);
     res.status(500).json({ message: 'Terjadi kesalahan pada server' });
   }
 });
