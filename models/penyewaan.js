@@ -29,7 +29,9 @@ module.exports = (sequelize, DataTypes) => {
     masaSewa: DataTypes.INTEGER,
     tanggalMulai_Update: DataTypes.DATE,
     tanggalAkhir_Update: DataTypes.DATE,
-    status: DataTypes.ENUM('Aktif', 'Selesai', 'Dibatalkan'),
+    status: {
+      type: DataTypes.ENUM('Aktif', 'Selesai', 'Dibatalkan'),
+      defaultValue:'Aktif'},
     alasan_batal: DataTypes.STRING
   }, {
     sequelize,

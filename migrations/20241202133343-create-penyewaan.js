@@ -48,6 +48,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM('Aktif', 'Selesai', 'Dibatalkan'),
+        defaultValue:'Aktif'
       },
       alasan_batal: {
         type: Sequelize.STRING
