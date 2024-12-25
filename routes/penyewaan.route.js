@@ -32,4 +32,39 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Endpoint untuk membatalkan penyewaan
+router.post('/batal', async (req, res) => {
+  try {
+    const { id_penyewaan, alasanPembatalan } = req.body;
+
+    if (!id_penyewaan || !alasanPembatalan) {
+      return res.status(400).json({ message: 'ID penyewaan dan alasan pembatalan harus diisi' });
+    }
+
+    // Cari penyewaan berdasarkan ID
+    const penyewaan = await Penyewaan.findByPk(id_penyewaan);
+
+    if (!penyewaan) {
+      return res.status(404).json({ message: 'Penyewaan tidak ditemukan' });
+    }
+
+    if (penyewaan.status !== 'Aktif') {
+      return res.status(400).json({ message: 'Penyewaan sudah dibatalkan atau selesai' });
+    }
+
+    // Update status penyewaan menjadi "batal" dan simpan alasan pembatalan
+    penyewaan.status = 'Dibatalkan';
+    penyewaan.alasanPembatalan = alasanPembatalan;
+    await penyewaan.save();
+
+    res.status(200).json({ 
+      success: true,
+      message: 'Penyewaan berhasil dibatalkan',
+      data: penyewaan 
+    });
+  } catch (error) {
+    res.status(400).json({ message: 'Gagal membatalkan penyewaan', error: error.message });
+  }
+});
+
 module.exports = router;
